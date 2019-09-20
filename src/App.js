@@ -17,13 +17,22 @@ class App extends React.Component {
         isDone : false
     }
     ],
-    time:0
+    time:0,
+    text:""
     }
     this.onClick = this.onClick.bind(this);
     setInterval(()=>{
       this.setState({time: this.state.time + 1})
-    },1000)
+    },1000);
+    
+    this.inputElement = React.createRef();
+    this.onChange = this.onChange.bind(this);
+
   }
+  componentDidMount(){
+    this.inputElement.current.focus();
+  };
+
 
   onClick(item){
     return (event) => {
@@ -36,16 +45,23 @@ class App extends React.Component {
       )
     }
   }
-
+  onChange(event){
+    console.log(event.keyCode);
+    this.setState({
+      text: event.target.value
+    })
+  }
   
 
   render(){
-    let { todoItems, time } = this.state;
+    let { todoItems, time, text } = this.state;
     return (
       <div className="App">
+        <input type='text' onKeyUp={this.onChange} ref={this.inputElement} />
+        <p>You input: {text}</p>
         <h2>{time}</h2>
         { todoItems.map((item, index) => {
-          return <Todo key={index} item={item} onClick={this.onClick} />
+          return <Todo item={item} key={index} onClick={this.onClick} />
         }) }
       </div>
     );

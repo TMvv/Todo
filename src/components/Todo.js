@@ -11,7 +11,7 @@ class Todo extends Component {
             url = unCheck;
         }
         return(
-            <div className='content' key={this.props.key}>
+            <div className='content'>
                 <img src={url} alt='icon check' onClick={ this.props.onClick(this.props.item)
                  }/>
                 <p>{ this.props.item.text }</p>
