@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import Todo from './components/Todo'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { ListGroup } from 'reactstrap';
 
 
 class App extends React.Component {
@@ -60,9 +63,11 @@ class App extends React.Component {
         <input type='text' onKeyUp={this.onChange} ref={this.inputElement} />
         <p>You input: {text}</p>
         <h2>{time}</h2>
+        <ListGroup>
         { todoItems.map((item, index) => {
           return <Todo item={item} key={index} onClick={this.onClick} />
         }) }
+        </ListGroup>
       </div>
     );
   }
